@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type PremiumReport = {
   attraction: number;
@@ -17,7 +18,6 @@ export default function UploadPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string>("");
   const [premium, setPremium] = useState<PremiumReport | null>(null);
-  const [isPremiumOpen, setIsPremiumOpen] = useState(false);
 
   const analyze = async () => {
     if (!file) return;
@@ -25,7 +25,6 @@ export default function UploadPage() {
     setLoading(true);
     setResult("");
     setPremium(null);
-    setIsPremiumOpen(false);
 
     try {
       const formData = new FormData();
@@ -86,71 +85,50 @@ export default function UploadPage() {
               {result}
             </div>
 
-            {!isPremiumOpen && (
-              <div className="p-4 border border-yellow-500/30 bg-yellow-500/10 rounded-xl">
-                <h3 className="font-bold text-yellow-300 mb-2">
-                  🔒 Premium Social Report
-                </h3>
+            <div className="p-4 border border-yellow-500/30 bg-yellow-500/10 rounded-xl">
+              <h3 className="font-bold text-yellow-300 mb-2">
+                🔒 Premium Social Report
+              </h3>
 
-                <p className="text-sm text-gray-200 mb-3">
-                  Detaylı sosyal algı raporunu aç.
-                </p>
+              <p className="text-sm text-gray-200 mb-3">
+                Detaylı sosyal algı raporu ödeme sonrası açılır.
+              </p>
 
-                <ul className="text-xs text-gray-300 space-y-1 mb-3">
-                  <li>• Çekicilik skoru</li>
-                  <li>• Özgüven analizi</li>
-                  <li>• Dating uyumluluğu</li>
-                  <li>• Güçlü ve zayıf yönler</li>
-                </ul>
+              <ul className="text-xs text-gray-300 space-y-1 mb-3">
+                <li>• Çekicilik skoru</li>
+                <li>• Özgüven analizi</li>
+                <li>• Dating uyumluluğu</li>
+                <li>• Güçlü ve zayıf yönler</li>
+              </ul>
 
-                <div className="bg-black/30 p-3 rounded-lg mb-3">
-                  <p className="text-yellow-300 font-bold text-lg">49 TL</p>
-                  <p className="text-xs text-gray-400">Tek seferlik ödeme</p>
-                </div>
-
-                <button
-                  onClick={() => setIsPremiumOpen(true)}
-                  className="w-full p-3 rounded-xl bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition"
-                >
-                  🔓 Premium Raporu Aç
-                </button>
+              <div className="bg-black/30 p-3 rounded-lg mb-3">
+                <p className="text-yellow-300 font-bold text-lg">49 TL</p>
+                <p className="text-xs text-gray-400">Tek seferlik ödeme</p>
               </div>
-            )}
 
-            {isPremiumOpen && premium && (
-              <div className="p-4 border border-green-500/30 bg-green-500/10 rounded-xl">
-                <h3 className="font-bold text-green-300 mb-4">
-                  ✅ Premium Social Report
+              <Link href="/premium">
+                <button className="w-full p-3 rounded-xl bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition">
+                  🔓 Premium Rapor Satın Al
+                </button>
+              </Link>
+            </div>
+
+            {premium && (
+              <div className="p-4 border border-white/10 bg-black/30 rounded-xl opacity-60 blur-[1px] pointer-events-none select-none">
+                <h3 className="font-bold text-white mb-4">
+                  Premium Rapor Önizlemesi
                 </h3>
 
                 <div className="space-y-2 text-sm">
-                  <p>🔥 Çekicilik: {premium.attraction}/100</p>
-                  <p>💪 Özgüven: {premium.confidence}/100</p>
-                  <p>🤝 Güvenilirlik: {premium.trust}/100</p>
-                  <p>❤️ Dating Skoru: {premium.dating}/100</p>
+                  <p>🔥 Çekicilik: ***/100</p>
+                  <p>💪 Özgüven: ***/100</p>
+                  <p>🤝 Güvenilirlik: ***/100</p>
+                  <p>❤️ Dating Skoru: ***/100</p>
                 </div>
 
-                <div className="mt-4">
-                  <h4 className="font-bold mb-2">Güçlü Yönler</h4>
-                  <ul className="text-sm list-disc ml-5">
-                    {premium.strengths.map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-4">
-                  <h4 className="font-bold mb-2">Geliştirilebilir Alanlar</h4>
-                  <ul className="text-sm list-disc ml-5">
-                    {premium.weaknesses.map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-4 p-3 bg-black/20 rounded-lg text-sm">
-                  {premium.summary}
-                </div>
+                <p className="mt-4 text-sm">
+                  Detaylı premium rapor ödeme sonrası açılır.
+                </p>
               </div>
             )}
           </div>
