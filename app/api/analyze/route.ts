@@ -19,6 +19,23 @@ export async function POST() {
   return NextResponse.json({
     result,
     score,
-    vibe
+    vibe,
+    premium: {
+      attraction: Math.floor(Math.random() * 15) + 80,
+      confidence: Math.floor(Math.random() * 15) + 78,
+      trust: Math.floor(Math.random() * 15) + 82,
+      dating: Math.floor(Math.random() * 15) + 76,
+      summary:
+        "Premium analizine göre sosyal algın güçlü. İnsanlar seni ilk etapta dikkat çekici, güven veren ve kontrollü biri olarak algılayabilir.",
+      strengths: [
+        "Güven veren duruş",
+        "Doğal karizma",
+        "Sosyal ortamlarda dikkat çekme potansiyeli"
+      ],
+      weaknesses: [
+        "İlk etapta biraz mesafeli algılanabilirsin",
+        "Duygularını fazla kontrollü gösterebilirsin"
+      ]
+    }
   });
 }
