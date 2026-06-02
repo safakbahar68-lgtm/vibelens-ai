@@ -48,10 +48,10 @@ export default function PremiumPage() {
           </div>
 
           <Link
-            href="/upload"
+            href="/payment"
             className="block text-center w-full p-3 rounded-xl bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition"
           >
-            Analize Başla
+            Premium Rapor Satın Al - 49 TL
           </Link>
         </div>
 
@@ -68,6 +68,7 @@ export default function PremiumPage() {
         <footer className="mt-8 flex flex-wrap justify-center gap-4 text-xs text-gray-400">
           <Link href="/">Ana Sayfa</Link>
           <Link href="/upload">Analiz</Link>
+          <Link href="/payment">Ödeme</Link>
           <Link href="/contact">İletişim</Link>
           <Link href="/privacy">Gizlilik Politikası</Link>
           <Link href="/terms">Kullanım Şartları</Link>
