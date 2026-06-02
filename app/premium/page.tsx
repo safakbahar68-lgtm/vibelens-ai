@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function PremiumPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-8">
@@ -7,17 +9,25 @@ export default function PremiumPage() {
         </h1>
 
         <p className="text-gray-300 mb-8">
-          Fotoğrafın üzerinden sosyal algı, ilk izlenim ve dating uyumluluğu hakkında daha detaylı rapor al.
+          VibeLens Premium Social Report, kullanıcıların yüklediği fotoğraf üzerinden sosyal algı, ilk izlenim ve dating uyumluluğu hakkında dijital rapor sunan ücretli bir hizmettir.
         </p>
 
         <div className="bg-white/10 border border-white/10 rounded-2xl p-6 mb-6">
           <h2 className="text-2xl font-bold text-yellow-300 mb-3">
-            Premium Social Report
+            Satışı Yapılan Hizmet
           </h2>
 
-          <p className="text-sm text-gray-300 mb-5">
-            Ücretsiz analiz yalnızca temel sonucu gösterir. Premium rapor, sosyal algını daha detaylı şekilde yorumlar.
-          </p>
+          <div className="space-y-3 text-sm text-gray-200 mb-6">
+            <p><strong>Ürün/Hizmet Adı:</strong> VibeLens Premium Social Report</p>
+            <p><strong>Hizmet Türü:</strong> Dijital sosyal algı ve ilk izlenim raporu</p>
+            <p><strong>Fiyat:</strong> 49 TL</p>
+            <p><strong>Teslim Şekli:</strong> Online dijital rapor</p>
+            <p><strong>Teslim Süresi:</strong> Ödeme sonrası anında erişim</p>
+          </div>
+
+          <h3 className="text-xl font-bold text-white mb-3">
+            Premium Raporda Neler Var?
+          </h3>
 
           <ul className="space-y-3 text-sm text-gray-200 mb-6">
             <li>✓ İlk 3 saniye algı analizi</li>
@@ -33,19 +43,19 @@ export default function PremiumPage() {
               49 TL
             </p>
             <p className="text-xs text-gray-400">
-              Tek seferlik premium rapor
+              Tek seferlik dijital premium rapor
             </p>
           </div>
 
-          <a
+          <Link
             href="/upload"
             className="block text-center w-full p-3 rounded-xl bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition"
           >
-            Premium Rapor Al
-          </a>
+            Analize Başla
+          </Link>
         </div>
 
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-sm text-gray-300">
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-sm text-gray-300 mb-8">
           <h3 className="font-bold text-white mb-2">
             Önemli Bilgilendirme
           </h3>
@@ -54,6 +64,14 @@ export default function PremiumPage() {
             VibeLens AI sonuçları yapay zeka destekli tahmini sosyal algı analizleridir. Sonuçlar eğlence ve bilgilendirme amaçlıdır; profesyonel psikolojik, tıbbi veya hukuki tavsiye niteliği taşımaz.
           </p>
         </div>
+
+        <footer className="mt-8 flex flex-wrap justify-center gap-4 text-xs text-gray-400">
+          <Link href="/">Ana Sayfa</Link>
+          <Link href="/upload">Analiz</Link>
+          <Link href="/contact">İletişim</Link>
+          <Link href="/privacy">Gizlilik Politikası</Link>
+          <Link href="/terms">Kullanım Şartları</Link>
+        </footer>
       </div>
     </main>
   );
