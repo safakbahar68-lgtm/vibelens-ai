@@ -67,11 +67,15 @@ export default function PremiumPage() {
 
         <footer className="mt-8 flex flex-wrap justify-center gap-4 text-xs text-gray-400">
           <Link href="/">Ana Sayfa</Link>
+          <Link href="/about">Hakkımızda</Link>
           <Link href="/upload">Analiz</Link>
+          <Link href="/premium">Premium</Link>
           <Link href="/payment">Ödeme</Link>
           <Link href="/contact">İletişim</Link>
           <Link href="/privacy">Gizlilik Politikası</Link>
           <Link href="/terms">Kullanım Şartları</Link>
+          <Link href="/distance-sales">Mesafeli Satış Sözleşmesi</Link>
+          <Link href="/refund">İade ve İptal Politikası</Link>
         </footer>
       </div>
     </main>

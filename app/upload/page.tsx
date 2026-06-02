@@ -142,6 +142,8 @@ export default function UploadPage() {
           <Link href="/contact">İletişim</Link>
           <Link href="/privacy">Gizlilik Politikası</Link>
           <Link href="/terms">Kullanım Şartları</Link>
+          <Link href="/distance-sales">Mesafeli Satış Sözleşmesi</Link>
+          <Link href="/refund">İade ve İptal Politikası</Link>
         </footer>
       </div>
     </main>
