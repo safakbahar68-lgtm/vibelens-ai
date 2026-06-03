@@ -26,11 +26,21 @@ export default function PaymentPage() {
 
           <div className="bg-black/30 rounded-xl p-4 mb-6">
             <p className="text-sm text-gray-300 mb-2">
-              Ödeme altyapısı şu anda iyzico değerlendirme sürecindedir.
+              Güvenli ödeme altyapısının aktivasyon süreci devam etmektedir.
             </p>
 
             <p className="text-sm text-gray-300">
-              İyzico onayı sonrası bu sayfadan güvenli ödeme alınacak ve premium rapor ödeme sonrası otomatik olarak açılacaktır.
+              Ödeme altyapısı aktif hale geldiğinde bu sayfadan güvenli ödeme alınacak ve premium rapor ödeme sonrası otomatik olarak erişime açılacaktır.
+            </p>
+          </div>
+
+          <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-xs text-gray-300">
+            <p className="mb-2">
+              Satın alma işlemi aktif olduğunda kullanıcı, ödeme öncesinde Mesafeli Satış Sözleşmesi ve İade/İptal Politikası hakkında bilgilendirilecektir.
+            </p>
+
+            <p>
+              Kart bilgileri VibeLens AI tarafından saklanmaz; ödeme işlemleri güvenli ödeme altyapısı üzerinden gerçekleştirilir.
             </p>
           </div>
 
@@ -44,11 +54,14 @@ export default function PaymentPage() {
 
         <footer className="mt-8 flex flex-wrap justify-center gap-4 text-xs text-gray-400">
           <Link href="/">Ana Sayfa</Link>
+          <Link href="/about">Hakkımızda</Link>
           <Link href="/premium">Premium</Link>
           <Link href="/upload">Analiz</Link>
           <Link href="/contact">İletişim</Link>
           <Link href="/privacy">Gizlilik Politikası</Link>
           <Link href="/terms">Kullanım Şartları</Link>
+          <Link href="/distance-sales">Mesafeli Satış Sözleşmesi</Link>
+          <Link href="/refund">İade ve İptal Politikası</Link>
         </footer>
       </div>
     </main>
