@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 export default function PaymentPage() {
+  const shopierLink = "https://www.shopier.com/vibelensai/47868020";
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-8">
       <div className="max-w-2xl mx-auto">
@@ -9,7 +11,7 @@ export default function PaymentPage() {
         </h1>
 
         <p className="text-gray-300 mb-8">
-          VibeLens Premium Social Report için ödeme adımındasınız.
+          VibeLens Premium Social Report için ödeme ve teslimat bilgileri.
         </p>
 
         <div className="bg-white/10 border border-white/10 rounded-2xl p-6 mb-6">
@@ -20,36 +22,38 @@ export default function PaymentPage() {
           <div className="space-y-3 text-sm text-gray-200 mb-6">
             <p><strong>Fiyat:</strong> 49 TL</p>
             <p><strong>Hizmet Türü:</strong> Dijital sosyal algı ve ilk izlenim raporu</p>
-            <p><strong>Teslim Şekli:</strong> Online dijital rapor</p>
-            <p><strong>Teslim Süresi:</strong> Ödeme sonrası anında erişim</p>
+            <p><strong>Teslim Şekli:</strong> E-posta yoluyla dijital teslimat</p>
+            <p><strong>Teslim Süresi:</strong> Gerekli yönlendirmeler en geç 2 saat içinde gönderilir</p>
           </div>
 
-          <div className="bg-black/30 rounded-xl p-4 mb-6">
-            <p className="text-sm text-gray-300 mb-2">
-              Güvenli ödeme altyapısının aktivasyon süreci devam etmektedir.
+          <div className="bg-black/30 rounded-xl p-4 mb-6 text-sm text-gray-300 space-y-3">
+            <p>
+              Satın alma işleminizin ardından sipariş bilgileriniz tarafımıza ulaşacaktır.
             </p>
 
-            <p className="text-sm text-gray-300">
-              Ödeme altyapısı aktif hale geldiğinde bu sayfadan güvenli ödeme alınacak ve premium rapor ödeme sonrası otomatik olarak erişime açılacaktır.
+            <p>
+              Siparişiniz incelendikten sonra premium rapor sürecine ilişkin gerekli yönlendirmeler kayıtlı e-posta adresinize en geç 2 saat içerisinde gönderilecektir.
+            </p>
+
+            <p>
+              Premium raporunuz dijital olarak hazırlanacak ve e-posta yoluyla teslim edilecektir.
             </p>
           </div>
 
           <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-xs text-gray-300">
-            <p className="mb-2">
-              Satın alma işlemi aktif olduğunda kullanıcı, ödeme öncesinde Mesafeli Satış Sözleşmesi ve İade/İptal Politikası hakkında bilgilendirilecektir.
-            </p>
-
             <p>
-              Kart bilgileri VibeLens AI tarafından saklanmaz; ödeme işlemleri güvenli ödeme altyapısı üzerinden gerçekleştirilir.
+              Önemli Not: Bu rapor yapay zeka destekli değerlendirmeler içerir. Sonuçlar bilgilendirme ve eğlence amaçlıdır; psikolojik, tıbbi veya hukuki değerlendirme niteliği taşımaz.
             </p>
           </div>
 
-          <button
-            disabled
-            className="w-full p-3 rounded-xl bg-gray-500 text-black font-bold cursor-not-allowed"
+          <a
+            href={shopierLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-center w-full p-3 rounded-xl bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition"
           >
-            Güvenli Ödeme Yakında Aktif
-          </button>
+            Shopier ile Güvenli Ödeme Yap
+          </a>
         </div>
 
         <footer className="mt-8 flex flex-wrap justify-center gap-4 text-xs text-gray-400">
