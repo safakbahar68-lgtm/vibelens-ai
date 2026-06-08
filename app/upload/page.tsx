@@ -11,6 +11,18 @@ type PremiumReport = {
   summary: string;
   strengths: string[];
   weaknesses: string[];
+
+  profileType?: string;
+  charismaType?: string;
+  rarity?: string;
+  badges?: string[];
+  firstImpression?: string;
+  socialPerception?: string;
+  trustAnalysis?: string;
+  communicationStyle?: string;
+  improvements?: string[];
+  recommendations?: string[];
+  finalSummary?: string;
 };
 
 export default function UploadPage() {
@@ -57,7 +69,7 @@ export default function UploadPage() {
           <h1 className="text-2xl font-bold mb-2">VibeLens AI</h1>
 
           <p className="text-gray-300 mb-6">
-            Fotoğrafını yükle, analiz edelim
+            Fotoğrafını yükle, ilk izlenim analizini keşfet
           </p>
 
           <input
@@ -92,19 +104,24 @@ export default function UploadPage() {
                 </h3>
 
                 <p className="text-sm text-gray-200 mb-3">
-                  Detaylı sosyal algı raporu ödeme sonrası açılır.
+                  Premium raporda sosyal algın daha detaylı yorumlanır.
                 </p>
 
                 <ul className="text-xs text-gray-300 space-y-1 mb-3">
-                  <li>• Çekicilik skoru</li>
-                  <li>• Özgüven analizi</li>
-                  <li>• Dating uyumluluğu</li>
-                  <li>• Güçlü ve zayıf yönler</li>
+                  <li>• Profil Tipi Analizi</li>
+                  <li>• Karizma Tipi</li>
+                  <li>• Profil Nadirliği</li>
+                  <li>• VibeLens Rozetleri</li>
+                  <li>• Sosyal Algı Profili</li>
+                  <li>• Güçlü ve geliştirilebilir yönler</li>
+                  <li>• Kişisel tavsiyeler</li>
                 </ul>
 
                 <div className="bg-black/30 p-3 rounded-lg mb-3">
                   <p className="text-yellow-300 font-bold text-lg">49 TL</p>
-                  <p className="text-xs text-gray-400">Tek seferlik ödeme</p>
+                  <p className="text-xs text-gray-400">
+                    Tek seferlik dijital premium rapor
+                  </p>
                 </div>
 
                 <Link href="/premium">
@@ -115,20 +132,56 @@ export default function UploadPage() {
               </div>
 
               {premium && (
-                <div className="p-4 border border-white/10 bg-black/30 rounded-xl opacity-60 blur-[1px] pointer-events-none select-none">
+                <div className="p-4 border border-white/10 bg-black/30 rounded-xl opacity-70 blur-[1px] pointer-events-none select-none">
                   <h3 className="font-bold text-white mb-4">
                     Premium Rapor Önizlemesi
                   </h3>
 
-                  <div className="space-y-2 text-sm">
-                    <p>🔥 Çekicilik: ***/100</p>
-                    <p>💪 Özgüven: ***/100</p>
-                    <p>🤝 Güvenilirlik: ***/100</p>
-                    <p>❤️ Dating Skoru: ***/100</p>
+                  <div className="space-y-3 text-sm">
+                    <div className="bg-white/5 border border-white/10 rounded-lg p-3">
+                      <p className="text-gray-400 text-xs">Profil Tipi</p>
+                      <p className="font-semibold">
+                        {premium.profileType || "Özel Profil Analizi"}
+                      </p>
+                    </div>
+
+                    <div className="bg-white/5 border border-white/10 rounded-lg p-3">
+                      <p className="text-gray-400 text-xs">Karizma Tipi</p>
+                      <p className="font-semibold">
+                        {premium.charismaType || "Kişisel Karizma Profili"}
+                      </p>
+                    </div>
+
+                    <div className="bg-white/5 border border-white/10 rounded-lg p-3">
+                      <p className="text-gray-400 text-xs">Profil Nadirliği</p>
+                      <p className="font-semibold">
+                        {premium.rarity || "VibeLens özel sınıflandırması"}
+                      </p>
+                    </div>
+
+                    <div className="bg-white/5 border border-white/10 rounded-lg p-3">
+                      <p className="text-gray-400 text-xs mb-1">
+                        Kazanılan Rozetler
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {(premium.badges || [
+                          "🏆 VibeLens Rozeti",
+                          "⭐ Sosyal Algı"
+                        ]).map((badge) => (
+                          <span
+                            key={badge}
+                            className="text-xs bg-purple-500/20 border border-purple-400/20 rounded-full px-2 py-1"
+                          >
+                            {badge}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
 
-                  <p className="mt-4 text-sm">
-                    Detaylı premium rapor ödeme sonrası açılır.
+                  <p className="mt-4 text-sm text-gray-300">
+                    Detaylı raporda ilk izlenim, sosyal algı, güven etkisi,
+                    iletişim profili ve kişisel tavsiyeler yer alır.
                   </p>
                 </div>
               )}
