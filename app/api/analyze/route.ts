@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-
+import { supabase } from "@/lib/supabase";
 const profiles = [
   {
     profileType: "Güven Veren Profil",
@@ -367,12 +367,31 @@ export async function POST() {
   const selectedProfile =
     profiles[Math.floor(Math.random() * profiles.length)];
 
+  const reportId = crypto.randomUUID();
+
+  const { error } = await supabase.from("reports").insert({
+    report_id: reportId,
+    score: selectedProfile.score,
+    vibe: selectedProfile.vibe,
+    profile_type: selectedProfile.profileType,
+    charisma_type: selectedProfile.charismaType,
+    rarity: selectedProfile.rarity,
+    summary: selectedProfile.finalSummary,
+    strengths: selectedProfile.strengths,
+    weaknesses: selectedProfile.improvements,
+    is_premium: false,
+  });
+
+  if (error) {
+    console.log("SUPABASE ERROR:", error);
+  }
+
   return NextResponse.json({
+    reportId,
     result: selectedProfile.result,
     score: selectedProfile.score,
     vibe: selectedProfile.vibe,
     premium: {
-      // Eski upload sayfası bozulmasın diye bunları şimdilik tutuyoruz
       attraction: selectedProfile.score,
       confidence: Math.min(selectedProfile.score + 2, 99),
       trust: Math.min(selectedProfile.score + 3, 99),
@@ -381,7 +400,6 @@ export async function POST() {
       strengths: selectedProfile.strengths,
       weaknesses: selectedProfile.improvements,
 
-      // Yeni Premium Report v2 alanları
       profileType: selectedProfile.profileType,
       charismaType: selectedProfile.charismaType,
       rarity: selectedProfile.rarity,
@@ -392,7 +410,7 @@ export async function POST() {
       communicationStyle: selectedProfile.communicationStyle,
       improvements: selectedProfile.improvements,
       recommendations: selectedProfile.recommendations,
-      finalSummary: selectedProfile.finalSummary
-    }
+      finalSummary: selectedProfile.finalSummary,
+    },
   });
 }

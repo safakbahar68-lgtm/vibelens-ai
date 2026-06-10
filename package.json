@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.108.1",
+    "caniuse-lite": "^1.0.30001797",
     "next": "16.2.6",
     "openai": "^6.39.0",
     "react": "19.2.4",
