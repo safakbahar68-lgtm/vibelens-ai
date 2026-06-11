@@ -21,28 +21,33 @@ export default function PaymentPage() {
 
           <div className="space-y-3 text-sm text-gray-200 mb-6">
             <p><strong>Fiyat:</strong> 49 TL</p>
-            <p><strong>Hizmet Türü:</strong> Dijital sosyal algı ve ilk izlenim raporu</p>
-            <p><strong>Teslim Şekli:</strong> E-posta yoluyla dijital teslimat</p>
-            <p><strong>Teslim Süresi:</strong> Gerekli yönlendirmeler en geç 2 saat içinde gönderilir</p>
+            <p><strong>Hizmet Türü:</strong> Dijital Sosyal Algı ve İlk İzlenim Raporu</p>
+            <p><strong>Teslim Şekli:</strong> Online Premium Rapor Erişimi</p>
+            <p><strong>Teslim Süresi:</strong> Ödeme İşleminin Tamamlanmasının Ardından En Geç 30 Dakika İçerisinde</p>
           </div>
 
           <div className="bg-black/30 rounded-xl p-4 mb-6 text-sm text-gray-300 space-y-3">
             <p>
-              Satın alma işleminizin ardından sipariş bilgileriniz tarafımıza ulaşacaktır.
+              • Premium Report ID veya Premium Report Link bilginiz analiz sonrasında oluşturulan Premium Rapor ekranında görüntülenir.
             </p>
 
             <p>
-              Siparişiniz incelendikten sonra premium rapor sürecine ilişkin gerekli yönlendirmeler kayıtlı e-posta adresinize en geç 2 saat içerisinde gönderilecektir.
+              • Shopier ödeme ekranındaki Not / Açıklama alanına Premium Report ID veya Premium Report Link bilginizi ekleyiniz.
             </p>
 
             <p>
-              Premium raporunuz dijital olarak hazırlanacak ve e-posta yoluyla teslim edilecektir.
+              • Ödeme kontrolünün ardından Premium Rapor erişiminiz aktif hale getirilir.
+            </p>
+
+            <p>
+              • Aktivasyon sonrasında aynı Premium Report Link üzerinden raporunuza erişebilirsiniz.
             </p>
           </div>
 
           <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-xs text-gray-300">
             <p>
-              Önemli Not: Bu rapor yapay zeka destekli değerlendirmeler içerir. Sonuçlar bilgilendirme ve eğlence amaçlıdır; psikolojik, tıbbi veya hukuki değerlendirme niteliği taşımaz.
+              VibeLens sonuçları yapay zeka destekli sosyal algı değerlendirmeleridir.
+              Sonuçlar eğlence ve bilgilendirme amaçlıdır.
             </p>
           </div>
 
