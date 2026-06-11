@@ -30,6 +30,12 @@ export default function UploadPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string>("");
   const [premium, setPremium] = useState<PremiumReport | null>(null);
+  const [reportId, setReportId] = useState<string>("");
+
+  const reportLink =
+    reportId && typeof window !== "undefined"
+      ? `${window.location.origin}/premium/${reportId}`
+      : "";
 
   const analyze = async () => {
     if (!file) return;
@@ -37,6 +43,7 @@ export default function UploadPage() {
     setLoading(true);
     setResult("");
     setPremium(null);
+    setReportId("");
 
     try {
       const formData = new FormData();
@@ -54,11 +61,23 @@ export default function UploadPage() {
       );
 
       setPremium(data.premium);
+      setReportId(data.reportId);
     } catch (err) {
       console.error(err);
       setResult("Hata oluştu, tekrar dene.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const copyReportLink = async () => {
+    if (!reportLink) return;
+
+    try {
+      await navigator.clipboard.writeText(reportLink);
+      alert("Premium Report Link kopyalandı.");
+    } catch {
+      alert("Link kopyalanamadı. Lütfen manuel olarak seçip kopyalayın.");
     }
   };
 
@@ -97,6 +116,31 @@ export default function UploadPage() {
               <div className="p-4 bg-black/40 rounded-xl text-sm whitespace-pre-line border border-white/10">
                 {result}
               </div>
+
+              {reportId && (
+                <div className="p-4 border border-purple-500/30 bg-purple-500/10 rounded-xl">
+                  <h3 className="font-bold text-purple-300 mb-2">
+                    Premium Report Link
+                  </h3>
+
+                  <p className="text-xs text-gray-300 mb-3">
+                    Shopier ödeme ekranındaki Not / Açıklama alanına bu linki
+                    ekleyiniz. Ödeme kontrolünden sonra premium raporunuz aynı
+                    link üzerinden açılır.
+                  </p>
+
+                  <div className="bg-black/40 border border-white/10 rounded-lg p-3 mb-3 break-all text-xs text-gray-200">
+                    {reportLink}
+                  </div>
+
+                  <button
+                    onClick={copyReportLink}
+                    className="w-full p-3 rounded-xl bg-purple-600 text-white font-bold hover:bg-purple-700 transition"
+                  >
+                    Premium Report Linki Kopyala
+                  </button>
+                </div>
+              )}
 
               <div className="p-4 border border-yellow-500/30 bg-yellow-500/10 rounded-xl">
                 <h3 className="font-bold text-yellow-300 mb-2">
@@ -166,7 +210,7 @@ export default function UploadPage() {
                       <div className="flex flex-wrap gap-2">
                         {(premium.badges || [
                           "🏆 VibeLens Rozeti",
-                          "⭐ Sosyal Algı"
+                          "⭐ Sosyal Algı",
                         ]).map((badge) => (
                           <span
                             key={badge}
