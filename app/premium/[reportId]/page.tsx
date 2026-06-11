@@ -24,6 +24,8 @@ export default async function ReportPage({
 }) {
   const { reportId } = await params;
 
+  const premiumReportLink = `https://vibelens-ai.vercel.app/premium/${reportId}`;
+
   const { data: report } = await supabase
     .from("reports")
     .select("*")
@@ -54,17 +56,47 @@ export default async function ReportPage({
             işlemini tamamlaman gerekir.
           </p>
 
+          <div className="bg-purple-500/10 border border-purple-500/30 rounded-2xl p-6 mb-6">
+            <h2 className="text-2xl font-bold text-purple-300 mb-4">
+              Premium Report Link
+            </h2>
+
+            <p className="text-sm text-gray-300 mb-4">
+              Shopier ödeme ekranındaki Not / Açıklama alanına aşağıdaki linki
+              ekleyiniz. Ödeme kontrolünden sonra premium raporunuz aynı link
+              üzerinden açılır.
+            </p>
+
+            <div className="bg-black/40 border border-white/10 rounded-xl p-4 text-xs text-gray-200 break-all mb-3">
+              {premiumReportLink}
+            </div>
+
+            <p className="text-xs text-gray-400">
+              Premium Report ID: {reportId}
+            </p>
+          </div>
+
           <div className="bg-white/10 border border-white/10 rounded-2xl p-6 mb-6">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">
               Önizleme
             </h2>
 
             <div className="space-y-3 text-sm text-gray-200">
-              <p><strong>Skor:</strong> {report.score}/100</p>
-              <p><strong>Vibe:</strong> {report.vibe}</p>
-              <p><strong>Profil Tipi:</strong> 🔒 Premium ile açılır</p>
-              <p><strong>Karizma Tipi:</strong> 🔒 Premium ile açılır</p>
-              <p><strong>Profil Nadirliği:</strong> 🔒 Premium ile açılır</p>
+              <p>
+                <strong>Skor:</strong> {report.score}/100
+              </p>
+              <p>
+                <strong>Vibe:</strong> {report.vibe}
+              </p>
+              <p>
+                <strong>Profil Tipi:</strong> 🔒 Premium ile açılır
+              </p>
+              <p>
+                <strong>Karizma Tipi:</strong> 🔒 Premium ile açılır
+              </p>
+              <p>
+                <strong>Profil Nadirliği:</strong> 🔒 Premium ile açılır
+              </p>
             </div>
           </div>
 
@@ -115,11 +147,21 @@ export default async function ReportPage({
             </h2>
 
             <div className="space-y-3 text-sm text-gray-200">
-              <p><strong>Profil Tipi:</strong> {report.profile_type}</p>
-              <p><strong>Karizma Tipi:</strong> {report.charisma_type}</p>
-              <p><strong>Profil Nadirliği:</strong> {report.rarity}</p>
-              <p><strong>Skor:</strong> {report.score}/100</p>
-              <p><strong>Vibe:</strong> {report.vibe}</p>
+              <p>
+                <strong>Profil Tipi:</strong> {report.profile_type}
+              </p>
+              <p>
+                <strong>Karizma Tipi:</strong> {report.charisma_type}
+              </p>
+              <p>
+                <strong>Profil Nadirliği:</strong> {report.rarity}
+              </p>
+              <p>
+                <strong>Skor:</strong> {report.score}/100
+              </p>
+              <p>
+                <strong>Vibe:</strong> {report.vibe}
+              </p>
             </div>
           </div>
 
@@ -129,9 +171,9 @@ export default async function ReportPage({
             </h2>
 
             <p className="text-sm text-gray-200 leading-relaxed">
-              {report.rarity} sınıfı, VibeLens içinde öne çıkan sosyal sinyalleri
-              temsil eder. Bu sonuç, profilinin sıradan bir ilk izlenimden daha
-              belirgin bir karakter etkisi taşıdığını gösterir.
+              {report.rarity} sınıfı, VibeLens içinde öne çıkan sosyal
+              sinyalleri temsil eder. Bu sonuç, profilinin sıradan bir ilk
+              izlenimden daha belirgin bir karakter etkisi taşıdığını gösterir.
             </p>
           </div>
         </div>
@@ -150,9 +192,9 @@ export default async function ReportPage({
               İlk Tanışma Etkisi
             </h2>
             <p className="text-sm text-gray-200 leading-relaxed">
-              İlk karşılaşmada {report.vibe?.toLowerCase()} bir enerji
-              bırakma potansiyelin yüksek. Bu etki, insanların seni daha hızlı
-              fark etmesine ve profilini daha dikkatli değerlendirmesine katkı
+              İlk karşılaşmada {report.vibe?.toLowerCase()} bir enerji bırakma
+              potansiyelin yüksek. Bu etki, insanların seni daha hızlı fark
+              etmesine ve profilini daha dikkatli değerlendirmesine katkı
               sağlayabilir.
             </p>
           </div>
@@ -163,8 +205,8 @@ export default async function ReportPage({
             </h2>
             <p className="text-sm text-gray-200 leading-relaxed">
               Profilin, doğru sunulduğunda daha ciddi, güvenilir ve ciddiye
-              alınabilir bir izlenim oluşturabilir. Özellikle net fotoğraf,
-              sade arka plan ve kontrollü ifade bu algıyı güçlendirir.
+              alınabilir bir izlenim oluşturabilir. Özellikle net fotoğraf, sade
+              arka plan ve kontrollü ifade bu algıyı güçlendirir.
             </p>
           </div>
 
