@@ -1,17 +1,25 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+
 const profiles = [
   {
     profileType: "Güven Veren Profil",
     charismaType: "Sessiz Güven",
+    vibelensSignature: "Güven Veren Güç",
+    aura: "Kozmik Mavi",
+    auraDescription:
+      "Dengeli, kontrollü ve güven oluşturan bir sosyal enerji yansıtıyor.",
     rarity: "İlk %29",
-    badges: ["🏆 Güven Oluşturucu", "⭐ Sessiz Karizma"],
+    rarityLevel: "Az Görülen",
+    badges: ["🏆 Güven Oluşturucu", "⭐ Sessiz Karizma", "🛡️ Güçlü Duruş"],
     score: 88,
     vibe: "Güven Veren",
     result:
       "İlk izlenimde dengeli, kontrollü ve güven veren bir enerji yansıtıyorsun.",
     firstImpression:
       "İlk karşılaşmada profilin sakin, kontrollü ve güven veren bir izlenim oluşturuyor. İnsanlar seni aceleci ya da agresif biri olarak değil, daha çok dengeli ve oturaklı biri olarak algılayabilir.",
+    firstThreeSeconds:
+      "İlk 3 saniyede sende güven, denge ve sakin bir güç algısı öne çıkıyor.",
     socialPerception:
       "Sosyal ortamlarda hızlı dikkat çekmekten çok, zaman içinde değer kazanan bir izlenim bırakıyorsun. Bu profil tipi özellikle güven, sadakat ve tutarlılık algısı açısından güçlüdür.",
     trustAnalysis:
@@ -40,14 +48,21 @@ const profiles = [
   {
     profileType: "Karizmatik Profil",
     charismaType: "Doğal Karizma",
+    vibelensSignature: "Galaktik Karizma",
+    aura: "Mor Nebula",
+    auraDescription:
+      "Merak uyandıran, dikkat çeken ve kolay unutulmayan bir enerji taşıyor.",
     rarity: "İlk %6",
-    badges: ["🔥 Sosyal Mıknatıs", "💎 Premium Aura"],
+    rarityLevel: "Çok Nadir",
+    badges: ["🔥 Sosyal Mıknatıs", "💎 Premium Aura", "🌟 Dikkat Çekici Aura"],
     score: 92,
     vibe: "Karizmatik",
     result:
       "Dikkat çekici, güçlü ve kendinden emin bir ilk izlenim oluşturuyorsun.",
     firstImpression:
       "İlk bakışta profilin dikkat çekici ve güçlü bir enerji veriyor. İnsanlar seni sıradan kalabalık içinde kolay fark edilebilecek biri olarak algılayabilir.",
+    firstThreeSeconds:
+      "İlk 3 saniyede dikkat çekme, merak uyandırma ve güçlü sosyal etki öne çıkıyor.",
     socialPerception:
       "Sosyal algında güçlü bir çekim etkisi var. Bu tarz profiller genellikle merak uyandırır ve karşı tarafta 'bu kişi hakkında daha fazlasını bilmek istiyorum' hissi oluşturabilir.",
     trustAnalysis:
@@ -76,14 +91,21 @@ const profiles = [
   {
     profileType: "Lider Profil",
     charismaType: "Lider Enerji",
+    vibelensSignature: "Doğal Lider",
+    aura: "Altın Enerji",
+    auraDescription:
+      "Kararlılık, yön verme gücü ve yüksek sosyal etki hissi oluşturuyor.",
     rarity: "İlk %11",
-    badges: ["👑 Lider Enerji", "🎯 Güçlü Etki"],
+    rarityLevel: "Nadir",
+    badges: ["👑 Lider Enerji", "🎯 Güçlü Etki", "🏆 Üst Düzey Karizma"],
     score: 90,
     vibe: "Lider",
     result:
       "Kararlı, güçlü ve yön veren bir ilk izlenim oluşturuyorsun.",
     firstImpression:
       "İlk karşılaşmada kararlı, güçlü ve kendinden emin bir izlenim bırakıyorsun. İnsanlar seni karar alabilen ve bulunduğu ortamda yön belirleyebilen biri olarak algılayabilir.",
+    firstThreeSeconds:
+      "İlk 3 saniyede kendinden emin duruş, liderlik ve güçlü etki algısı öne çıkıyor.",
     socialPerception:
       "Sosyal ortamlarda pasif kalmayan, varlığı hissedilen bir profil çiziyorsun. Bu durum özellikle profesyonel ve ciddi ortamlarda avantaj sağlayabilir.",
     trustAnalysis:
@@ -112,14 +134,21 @@ const profiles = [
   {
     profileType: "Profesyonel Profil",
     charismaType: "Profesyonel Etki",
+    vibelensSignature: "İlk İzlenim Ustası",
+    aura: "Gümüş Denge",
+    auraDescription:
+      "Düzenli, güvenilir ve ciddiye alınan bir profesyonel enerji veriyor.",
     rarity: "İlk %21",
-    badges: ["💼 Profesyonel Aura", "🏆 Güven Oluşturucu"],
+    rarityLevel: "Az Görülen",
+    badges: ["💼 Profesyonel Aura", "🏆 Güven Oluşturucu", "🎯 Net İfade Gücü"],
     score: 87,
     vibe: "Profesyonel",
     result:
       "Düzenli, güvenilir ve ciddiye alınan bir profil izlenimi veriyorsun.",
     firstImpression:
       "İlk izlenimde düzenli, kontrollü ve ciddiye alınabilir bir profil çiziyorsun. İnsanlar seni sorumluluk sahibi ve güvenilir biri olarak algılayabilir.",
+    firstThreeSeconds:
+      "İlk 3 saniyede düzen, ciddiyet ve güvenilirlik hissi öne çıkıyor.",
     socialPerception:
       "Sosyal algın özellikle profesyonel ortamlarda güçlü. İş, networking ve ciddi iletişimlerde olumlu bir başlangıç yapma potansiyelin yüksek.",
     trustAnalysis:
@@ -148,14 +177,21 @@ const profiles = [
   {
     profileType: "Analitik Profil",
     charismaType: "Stratejik Zihin",
+    vibelensSignature: "Zihin Mimarı",
+    aura: "Derin Okyanus",
+    auraDescription:
+      "Derinlikli, düşünceli ve kolay çözülemeyen bir sosyal izlenim oluşturuyor.",
     rarity: "İlk %18",
-    badges: ["🧠 Stratejik Zihin", "📊 Analitik Bakış"],
+    rarityLevel: "Nadir",
+    badges: ["🧠 Stratejik Zihin", "📊 Analitik Bakış", "🌌 Kozmik Aura"],
     score: 86,
     vibe: "Analitik",
     result:
       "Düşünceli, kontrollü ve stratejik bir izlenim oluşturuyorsun.",
     firstImpression:
       "İlk bakışta düşünceli, sakin ve detaylara önem veren bir izlenim oluşturuyorsun. İnsanlar seni yüzeysel değil, daha derinlikli biri olarak algılayabilir.",
+    firstThreeSeconds:
+      "İlk 3 saniyede düşünceli, kontrollü ve merak uyandıran bir zihin algısı öne çıkıyor.",
     socialPerception:
       "Sosyal algında akılcı ve gözlemci bir taraf öne çıkıyor. Bu profil tipi genellikle hızlı parlamaktan çok, kaliteli iletişimlerde değer kazanır.",
     trustAnalysis:
@@ -184,14 +220,21 @@ const profiles = [
   {
     profileType: "Enerjik Profil",
     charismaType: "Yüksek Enerji",
+    vibelensSignature: "Enerjik Etki",
+    aura: "Kozmik Alev",
+    auraDescription:
+      "Canlı, dinamik ve yüksek görünürlük potansiyeli taşıyan bir enerji veriyor.",
     rarity: "İlk %9",
-    badges: ["⚡ Yüksek Enerji", "🔥 Sosyal Mıknatıs"],
+    rarityLevel: "Çok Nadir",
+    badges: ["⚡ Yüksek Enerji", "🔥 Sosyal Mıknatıs", "🚀 Yüksek Sosyal Potansiyel"],
     score: 91,
     vibe: "Enerjik",
     result:
       "Dinamik, canlı ve pozitif bir ilk izlenim oluşturuyorsun.",
     firstImpression:
       "İlk izlenimde hareketli, canlı ve dikkat çeken bir enerji yayıyorsun. İnsanlar seni bulunduğu ortama dinamizm katabilecek biri olarak algılayabilir.",
+    firstThreeSeconds:
+      "İlk 3 saniyede canlılık, sosyal hareket ve yüksek enerji algısı öne çıkıyor.",
     socialPerception:
       "Sosyal algında pozitiflik ve hareket öne çıkıyor. Bu profil tipi genellikle sosyal ortamlarda fark edilir ve çevresine enerji verebilir.",
     trustAnalysis:
@@ -220,14 +263,21 @@ const profiles = [
   {
     profileType: "Sakin Profil",
     charismaType: "Sakin Güç",
+    vibelensSignature: "Sessiz Etki",
+    aura: "Gece Yıldızı",
+    auraDescription:
+      "Sessiz fakat zamanla güçlenen, olgun ve kalıcı bir etki oluşturuyor.",
     rarity: "İlk %16",
-    badges: ["🌙 Sakin Güç", "🏆 Güven Oluşturucu"],
+    rarityLevel: "Nadir",
+    badges: ["🌙 Sakin Güç", "🏆 Güven Oluşturucu", "⭐ Sessiz Etki"],
     score: 85,
     vibe: "Sakin",
     result:
       "Olgun, huzurlu ve dengeli bir ilk izlenim oluşturuyorsun.",
     firstImpression:
       "İlk karşılaşmada sakin, huzurlu ve kontrollü bir izlenim bırakıyorsun. İnsanlar seni gerginlik yaratmayan, dengeli ve olgun biri olarak algılayabilir.",
+    firstThreeSeconds:
+      "İlk 3 saniyede sakinlik, olgunluk ve güvenli bir enerji hissi öne çıkıyor.",
     socialPerception:
       "Sosyal algında sakinlik ve güven hissi öne çıkıyor. Bu profil tipi özellikle derin ve kaliteli ilişkilerde güçlü bir etki bırakabilir.",
     trustAnalysis:
@@ -256,14 +306,21 @@ const profiles = [
   {
     profileType: "Samimi Profil",
     charismaType: "Doğal Yakınlık",
+    vibelensSignature: "Doğal Yakınlık",
+    aura: "Kuzey Işığı",
+    auraDescription:
+      "Yakın hissettiren, sıcak ve pozitif sosyal bağ kurma enerjisi taşıyor.",
     rarity: "İlk %24",
-    badges: ["🤝 Doğal Yakınlık", "🌟 Pozitif Etki"],
+    rarityLevel: "Az Görülen",
+    badges: ["🤝 Doğal Yakınlık", "🌟 Pozitif Etki", "🫶 Yaklaşılabilir Karakter"],
     score: 86,
     vibe: "Samimi",
     result:
       "Yakın hissettiren, doğal ve pozitif bir izlenim oluşturuyorsun.",
     firstImpression:
       "İlk izlenimde ulaşılabilir, doğal ve samimi bir enerji veriyorsun. İnsanlar seninle iletişim kurmanın kolay olabileceğini düşünebilir.",
+    firstThreeSeconds:
+      "İlk 3 saniyede sıcaklık, doğallık ve yaklaşılabilirlik algısı öne çıkıyor.",
     socialPerception:
       "Sosyal algında sıcaklık ve doğallık öne çıkıyor. Bu profil tipi genellikle karşı tarafta güvenli ve rahat bir iletişim hissi oluşturur.",
     trustAnalysis:
@@ -292,14 +349,21 @@ const profiles = [
   {
     profileType: "Sosyal Profil",
     charismaType: "Sosyal Çekim",
+    vibelensSignature: "Sosyal Mıknatıs",
+    aura: "Galaktik Mor",
+    auraDescription:
+      "Sosyal ortamlarda fark edilme ve iletişim başlatma potansiyeli yüksek bir enerji taşıyor.",
     rarity: "İlk %14",
-    badges: ["🎉 Sosyal Çekim", "🔥 Sosyal Mıknatıs"],
+    rarityLevel: "Nadir",
+    badges: ["🎉 Sosyal Çekim", "🔥 Sosyal Mıknatıs", "🌟 Dikkat Çekici Aura"],
     score: 89,
     vibe: "Sosyal",
     result:
       "Ulaşılabilir, dikkat çekici ve sosyal ortamlara uyumlu bir izlenim oluşturuyorsun.",
     firstImpression:
       "İlk izlenimde sosyal, açık ve iletişime yatkın bir profil çiziyorsun. İnsanlar seni yeni ortamlara kolay uyum sağlayabilecek biri olarak algılayabilir.",
+    firstThreeSeconds:
+      "İlk 3 saniyede sosyal açıklık, pozitif enerji ve iletişim potansiyeli öne çıkıyor.",
     socialPerception:
       "Sosyal algın oldukça güçlü. Bu profil tipi genellikle arkadaş ortamlarında, yeni tanışmalarda ve topluluk içinde olumlu görünürlük sağlar.",
     trustAnalysis:
@@ -328,14 +392,21 @@ const profiles = [
   {
     profileType: "Dengeli Profil",
     charismaType: "Dengeli Etki",
+    vibelensSignature: "Dengeli Güç",
+    aura: "Gümüş Denge",
+    auraDescription:
+      "Aşırılıktan uzak, güvenli, ölçülü ve istikrarlı bir sosyal enerji taşıyor.",
     rarity: "İlk %48",
-    badges: ["🎯 Dengeli Profil", "🏆 Güven Oluşturucu"],
+    rarityLevel: "Yaygın",
+    badges: ["🎯 Dengeli Profil", "🏆 Güven Oluşturucu", "⚖️ Dengeli Duruş"],
     score: 84,
     vibe: "Dengeli",
     result:
       "Ölçülü, tutarlı ve güvenli bir ilk izlenim oluşturuyorsun.",
     firstImpression:
       "İlk izlenimde dengeli, ölçülü ve sakin bir profil çiziyorsun. İnsanlar seni abartılı değil, daha tutarlı ve güvenli biri olarak algılayabilir.",
+    firstThreeSeconds:
+      "İlk 3 saniyede denge, ölçülülük ve güvenli bir ilk temas algısı öne çıkıyor.",
     socialPerception:
       "Sosyal algın uçlarda değil; bu da seni geniş kitleler için daha rahat kabul edilebilir hale getirir. Profilin dengeli ve istikrarlı bir enerji sunuyor.",
     trustAnalysis:
@@ -369,18 +440,29 @@ export async function POST() {
 
   const reportId = crypto.randomUUID();
 
-  const { error } = await supabase.from("reports").insert({
-    report_id: reportId,
-    score: selectedProfile.score,
-    vibe: selectedProfile.vibe,
-    profile_type: selectedProfile.profileType,
-    charisma_type: selectedProfile.charismaType,
-    rarity: selectedProfile.rarity,
-    summary: selectedProfile.finalSummary,
-    strengths: selectedProfile.strengths,
-    weaknesses: selectedProfile.improvements,
-    is_premium: false,
-  });
+ const { error } = await supabase.from("reports").insert({
+  report_id: reportId,
+  score: selectedProfile.score,
+  vibe: selectedProfile.vibe,
+
+  profile_type: selectedProfile.profileType,
+  charisma_type: selectedProfile.charismaType,
+
+  rarity: selectedProfile.rarity,
+
+  vibelens_signature: selectedProfile.vibelensSignature,
+  aura: selectedProfile.aura,
+  aura_description: selectedProfile.auraDescription,
+  rarity_level: selectedProfile.rarityLevel,
+  first_three_seconds: selectedProfile.firstThreeSeconds,
+
+  summary: selectedProfile.finalSummary,
+
+  strengths: selectedProfile.strengths,
+  weaknesses: selectedProfile.improvements,
+
+  is_premium: false,
+});
 
   if (error) {
     console.log("SUPABASE ERROR:", error);
@@ -396,21 +478,31 @@ export async function POST() {
       confidence: Math.min(selectedProfile.score + 2, 99),
       trust: Math.min(selectedProfile.score + 3, 99),
       dating: Math.max(selectedProfile.score - 4, 70),
+
       summary: selectedProfile.finalSummary,
       strengths: selectedProfile.strengths,
       weaknesses: selectedProfile.improvements,
 
       profileType: selectedProfile.profileType,
       charismaType: selectedProfile.charismaType,
+      vibelensSignature: selectedProfile.vibelensSignature,
+      aura: selectedProfile.aura,
+      auraDescription: selectedProfile.auraDescription,
       rarity: selectedProfile.rarity,
+      rarityLevel: selectedProfile.rarityLevel,
       badges: selectedProfile.badges,
+
       firstImpression: selectedProfile.firstImpression,
+      firstThreeSeconds: selectedProfile.firstThreeSeconds,
       socialPerception: selectedProfile.socialPerception,
       trustAnalysis: selectedProfile.trustAnalysis,
       communicationStyle: selectedProfile.communicationStyle,
       improvements: selectedProfile.improvements,
       recommendations: selectedProfile.recommendations,
       finalSummary: selectedProfile.finalSummary,
+
+      shareCardTitle: selectedProfile.profileType,
+      shareCardSubtitle: `${selectedProfile.rarity} • ${selectedProfile.rarityLevel}`,
     },
   });
 }

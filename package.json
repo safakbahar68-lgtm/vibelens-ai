@@ -11,6 +11,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.108.1",
     "caniuse-lite": "^1.0.30001797",
+    "html2canvas": "^1.4.1",
     "next": "16.2.6",
     "openai": "^6.39.0",
     "react": "19.2.4",

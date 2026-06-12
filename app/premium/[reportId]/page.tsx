@@ -1,18 +1,18 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
-function getBadges(profileType: string, vibe: string) {
+function getBadges(report: any) {
   const badges = ["⭐ Premium Profil"];
 
-  if (profileType?.includes("Lider")) badges.push("👑 Lider Enerji");
-  if (profileType?.includes("Karizmatik")) badges.push("🔥 Sosyal Mıknatıs");
-  if (profileType?.includes("Güven")) badges.push("🏆 Güven Oluşturucu");
-  if (profileType?.includes("Profesyonel")) badges.push("💼 Profesyonel Aura");
-  if (profileType?.includes("Analitik")) badges.push("🧠 Stratejik Zihin");
-  if (profileType?.includes("Sosyal")) badges.push("🎉 Sosyal Çekim");
-  if (profileType?.includes("Sakin")) badges.push("🌙 Sakin Güç");
-  if (profileType?.includes("Samimi")) badges.push("🤝 Doğal Yakınlık");
-  if (vibe) badges.push(`✨ ${vibe} Vibe`);
+  if (report.profile_type?.includes("Lider")) badges.push("👑 Lider Enerji");
+  if (report.profile_type?.includes("Karizmatik")) badges.push("🔥 Sosyal Mıknatıs");
+  if (report.profile_type?.includes("Güven")) badges.push("🏆 Güven Oluşturucu");
+  if (report.profile_type?.includes("Profesyonel")) badges.push("💼 Profesyonel Aura");
+  if (report.profile_type?.includes("Analitik")) badges.push("🧠 Stratejik Zihin");
+  if (report.profile_type?.includes("Sosyal")) badges.push("🎉 Sosyal Çekim");
+  if (report.profile_type?.includes("Sakin")) badges.push("🌙 Sakin Güç");
+  if (report.aura) badges.push(`🌌 ${report.aura}`);
+  if (report.rarity_level) badges.push(`💎 ${report.rarity_level}`);
 
   return badges;
 }
@@ -23,8 +23,6 @@ export default async function ReportPage({
   params: Promise<{ reportId: string }>;
 }) {
   const { reportId } = await params;
-
-  const premiumReportLink = `https://vibelens-ai.vercel.app/premium/${reportId}`;
 
   const { data: report } = await supabase
     .from("reports")
@@ -45,6 +43,9 @@ export default async function ReportPage({
     );
   }
 
+  const premiumReportLink = `https://vibelens-ai.vercel.app/premium/${reportId}`;
+  const badges = getBadges(report);
+
   if (!report.is_premium) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-8">
@@ -52,8 +53,7 @@ export default async function ReportPage({
           <h1 className="text-4xl font-bold mb-4">Premium Rapor Kilitli</h1>
 
           <p className="text-gray-300 mb-8">
-            Analizin oluşturuldu. Premium raporu görüntülemek için satın alma
-            işlemini tamamlaman gerekir.
+            Analizin oluşturuldu. Premium raporu görüntülemek için satın alma işlemini tamamlaman gerekir.
           </p>
 
           <div className="bg-purple-500/10 border border-purple-500/30 rounded-2xl p-6 mb-6">
@@ -62,59 +62,30 @@ export default async function ReportPage({
             </h2>
 
             <p className="text-sm text-gray-300 mb-4">
-              Shopier ödeme ekranındaki Not / Açıklama alanına aşağıdaki linki
-              ekleyiniz. Ödeme kontrolünden sonra premium raporunuz aynı link
-              üzerinden açılır.
+              Shopier ödeme ekranındaki Not / Açıklama alanına aşağıdaki linki ekleyiniz.
+              Ödeme kontrolünden sonra premium raporunuz aynı link üzerinden açılır.
             </p>
 
             <div className="bg-black/40 border border-white/10 rounded-xl p-4 text-xs text-gray-200 break-all mb-3">
               {premiumReportLink}
             </div>
 
-            <p className="text-xs text-gray-400">
-              Premium Report ID: {reportId}
-            </p>
+            <p className="text-xs text-gray-400">Premium Report ID: {reportId}</p>
           </div>
 
           <div className="bg-white/10 border border-white/10 rounded-2xl p-6 mb-6">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">
-              Önizleme
+              Kilitli Önizleme
             </h2>
 
             <div className="space-y-3 text-sm text-gray-200">
-              <p>
-                <strong>Skor:</strong> {report.score}/100
-              </p>
-              <p>
-                <strong>Vibe:</strong> {report.vibe}
-              </p>
-              <p>
-                <strong>Profil Tipi:</strong> 🔒 Premium ile açılır
-              </p>
-              <p>
-                <strong>Karizma Tipi:</strong> 🔒 Premium ile açılır
-              </p>
-              <p>
-                <strong>Profil Nadirliği:</strong> 🔒 Premium ile açılır
-              </p>
+              <p><strong>Skor:</strong> {report.score}/100</p>
+              <p><strong>Vibe:</strong> {report.vibe}</p>
+              <p><strong>Profil Tipi:</strong> 🔒 Premium ile açılır</p>
+              <p><strong>VibeLens İmzası:</strong> 🔒 Premium ile açılır</p>
+              <p><strong>Aura:</strong> 🔒 Premium ile açılır</p>
+              <p><strong>Profil Nadirliği:</strong> 🔒 Premium ile açılır</p>
             </div>
-          </div>
-
-          <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-6 mb-6">
-            <h3 className="font-bold text-yellow-300 mb-3">
-              Premium Raporda Açılacaklar
-            </h3>
-
-            <ul className="text-sm text-gray-200 space-y-2">
-              <li>✓ Profil tipi analizi</li>
-              <li>✓ Karizma tipi</li>
-              <li>✓ Profil nadirliği</li>
-              <li>✓ VibeLens rozetleri</li>
-              <li>✓ Sosyal algı profili</li>
-              <li>✓ İlk tanışma etkisi</li>
-              <li>✓ Profesyonel algı</li>
-              <li>✓ Kişisel tavsiyeler</li>
-            </ul>
           </div>
 
           <Link
@@ -128,110 +99,107 @@ export default async function ReportPage({
     );
   }
 
-  const badges = getBadges(report.profile_type, report.vibe);
-
   return (
-    <main className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-8">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold mb-2">VibeLens Premium Report</h1>
+    <main className="min-h-screen bg-gradient-to-br from-black via-gray-950 to-black text-white p-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-8">
+          <p className="text-yellow-300 text-sm font-semibold mb-2">
+            VibeLens AI Premium Social Report
+          </p>
 
-        <p className="text-gray-300 mb-8">
-          Bu rapor, profilinin sosyal algı, ilk izlenim ve kişisel etki
-          potansiyelini değerlendirmek için hazırlanmıştır.
-        </p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Premium Raporun Hazır
+          </h1>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
-          <div className="bg-white/10 border border-white/10 rounded-2xl p-6">
-            <h2 className="text-2xl font-bold text-yellow-300 mb-4">
-              Profil Özeti
-            </h2>
-
-            <div className="space-y-3 text-sm text-gray-200">
-              <p>
-                <strong>Profil Tipi:</strong> {report.profile_type}
-              </p>
-              <p>
-                <strong>Karizma Tipi:</strong> {report.charisma_type}
-              </p>
-              <p>
-                <strong>Profil Nadirliği:</strong> {report.rarity}
-              </p>
-              <p>
-                <strong>Skor:</strong> {report.score}/100
-              </p>
-              <p>
-                <strong>Vibe:</strong> {report.vibe}
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-6">
-            <h2 className="text-2xl font-bold text-yellow-300 mb-4">
-              Profil Nadirliği Yorumu
-            </h2>
-
-            <p className="text-sm text-gray-200 leading-relaxed">
-              {report.rarity} sınıfı, VibeLens içinde öne çıkan sosyal
-              sinyalleri temsil eder. Bu sonuç, profilinin sıradan bir ilk
-              izlenimden daha belirgin bir karakter etkisi taşıdığını gösterir.
-            </p>
-          </div>
+          <p className="text-gray-300 max-w-3xl">
+            Bu rapor; profil tipin, sosyal algın, ilk izlenim etkin ve kişisel
+            VibeLens sınıflandırman üzerinden hazırlanmıştır.
+          </p>
         </div>
 
-        <div className="bg-white/10 border border-white/10 rounded-2xl p-6 mb-6">
-          <h2 className="text-2xl font-bold text-yellow-300 mb-4">
-            Genel Değerlendirme
-          </h2>
+        <div className="grid md:grid-cols-3 gap-6 mb-6">
+          <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-6">
+            <p className="text-xs text-gray-400 mb-1">👑 Profil Tipi</p>
+            <h2 className="text-2xl font-bold text-yellow-300">
+              {report.profile_type}
+            </h2>
+            <p className="text-sm text-gray-300 mt-3">
+              Genel sosyal algında öne çıkan ana profil sınıfın.
+            </p>
+          </div>
 
-          <p className="text-gray-200 leading-relaxed">{report.summary}</p>
+          <div className="bg-purple-500/10 border border-purple-500/30 rounded-2xl p-6">
+            <p className="text-xs text-gray-400 mb-1">⭐ VibeLens İmzası</p>
+            <h2 className="text-2xl font-bold text-purple-300">
+              {report.vibelens_signature || "Kişisel Etki İmzası"}
+            </h2>
+            <p className="text-sm text-gray-300 mt-3">
+              Profilinin bıraktığı en karakteristik sosyal iz.
+            </p>
+          </div>
+
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-2xl p-6">
+            <p className="text-xs text-gray-400 mb-1">🌌 Aura</p>
+            <h2 className="text-2xl font-bold text-blue-300">
+              {report.aura || "VibeLens Aura"}
+            </h2>
+            <p className="text-sm text-gray-300 mt-3">
+              {report.aura_description || "Profilinin oluşturduğu genel sosyal enerji."}
+            </p>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-6">
           <div className="bg-white/10 border border-white/10 rounded-2xl p-6">
-            <h2 className="text-xl font-bold text-purple-300 mb-3">
-              İlk Tanışma Etkisi
-            </h2>
-            <p className="text-sm text-gray-200 leading-relaxed">
-              İlk karşılaşmada {report.vibe?.toLowerCase()} bir enerji bırakma
-              potansiyelin yüksek. Bu etki, insanların seni daha hızlı fark
-              etmesine ve profilini daha dikkatli değerlendirmesine katkı
-              sağlayabilir.
+            <p className="text-xs text-gray-400 mb-1">📊 Genel Skor</p>
+            <h2 className="text-4xl font-bold">{report.score}/100</h2>
+            <p className="text-sm text-gray-300 mt-3">
+              Genel Vibe skoru; profilin oluşturduğu toplam ilk izlenim etkisini temsil eder.
             </p>
           </div>
 
           <div className="bg-white/10 border border-white/10 rounded-2xl p-6">
-            <h2 className="text-xl font-bold text-blue-300 mb-3">
-              Profesyonel Algı
+            <p className="text-xs text-gray-400 mb-1">📌 Profil Nadirliği</p>
+            <h2 className="text-3xl font-bold text-yellow-300">
+              {report.rarity}
             </h2>
-            <p className="text-sm text-gray-200 leading-relaxed">
-              Profilin, doğru sunulduğunda daha ciddi, güvenilir ve ciddiye
-              alınabilir bir izlenim oluşturabilir. Özellikle net fotoğraf, sade
-              arka plan ve kontrollü ifade bu algıyı güçlendirir.
+            <p className="text-sm text-yellow-200 mt-2">
+              {report.rarity_level || "Özel Seviye"}
             </p>
           </div>
 
           <div className="bg-white/10 border border-white/10 rounded-2xl p-6">
-            <h2 className="text-xl font-bold text-pink-300 mb-3">
-              Sosyal Etki
+            <p className="text-xs text-gray-400 mb-1">✨ Vibe</p>
+            <h2 className="text-3xl font-bold text-purple-300">
+              {report.vibe}
             </h2>
-            <p className="text-sm text-gray-200 leading-relaxed">
-              Sosyal ortamlarda profilin, insanlarda merak ve değerlendirme
-              isteği oluşturabilir. Bu etki, özellikle ilk izlenimlerde güçlü
-              bir avantaj sağlayabilir.
+            <p className="text-sm text-gray-300 mt-3">
+              İlk algıda öne çıkan genel sosyal enerji.
             </p>
           </div>
         </div>
 
         <div className="bg-white/10 border border-white/10 rounded-2xl p-6 mb-6">
           <h2 className="text-2xl font-bold text-yellow-300 mb-4">
-            VibeLens Rozetleri
+            👀 İlk 3 Saniye Algısı
+          </h2>
+
+          <p className="text-gray-200 leading-relaxed">
+            {report.first_three_seconds ||
+              "İlk karşılaşmada bıraktığın sosyal etki premium raporda detaylı yorumlanır."}
+          </p>
+        </div>
+
+        <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/20 border border-purple-500/20 rounded-2xl p-6 mb-6">
+          <h2 className="text-2xl font-bold text-purple-300 mb-4">
+            🏆 VibeLens Rozetleri
           </h2>
 
           <div className="flex flex-wrap gap-3">
             {badges.map((badge) => (
               <span
                 key={badge}
-                className="bg-purple-500/20 border border-purple-400/30 rounded-full px-4 py-2 text-sm"
+                className="bg-black/30 border border-purple-400/30 rounded-full px-4 py-2 text-sm"
               >
                 {badge}
               </span>
@@ -242,7 +210,7 @@ export default async function ReportPage({
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div className="bg-white/10 border border-white/10 rounded-2xl p-6">
             <h2 className="text-2xl font-bold text-green-300 mb-4">
-              Güçlü Yönler
+              💪 Güçlü Yönler
             </h2>
 
             <ul className="space-y-2 text-sm text-gray-200">
@@ -254,7 +222,7 @@ export default async function ReportPage({
 
           <div className="bg-white/10 border border-white/10 rounded-2xl p-6">
             <h2 className="text-2xl font-bold text-red-300 mb-4">
-              Geliştirilebilir Alanlar
+              📈 Geliştirilebilir Alanlar
             </h2>
 
             <ul className="space-y-2 text-sm text-gray-200">
@@ -265,17 +233,53 @@ export default async function ReportPage({
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-purple-900/50 to-yellow-500/10 border border-yellow-500/20 rounded-2xl p-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-6">
+          <div className="bg-white/10 border border-white/10 rounded-2xl p-6">
+            <h2 className="text-xl font-bold text-blue-300 mb-3">
+              🤝 Sosyal Algı
+            </h2>
+            <p className="text-sm text-gray-200 leading-relaxed">
+              Profilin, sosyal ortamlarda {report.vibe?.toLowerCase()} bir izlenim bırakma
+              potansiyeli taşıyor. Bu etki doğru fotoğraf, ifade ve sunumla daha da güçlenebilir.
+            </p>
+          </div>
+
+          <div className="bg-white/10 border border-white/10 rounded-2xl p-6">
+            <h2 className="text-xl font-bold text-purple-300 mb-3">
+              🛡️ Güven Etkisi
+            </h2>
+            <p className="text-sm text-gray-200 leading-relaxed">
+              {report.profile_type} sınıfı, karşı tarafta belirli bir sosyal güven ve
+              değerlendirme isteği oluşturabilir. İlk izlenimde tutarlı görünüm önemlidir.
+            </p>
+          </div>
+
+          <div className="bg-white/10 border border-white/10 rounded-2xl p-6">
+            <h2 className="text-xl font-bold text-pink-300 mb-3">
+              💬 İletişim Tarzı
+            </h2>
+            <p className="text-sm text-gray-200 leading-relaxed">
+              Profilin, ilk iletişimde doğrudan sözcüklerden önce genel duruş ve enerjiyle
+              etki oluşturuyor. Bu yüzden fotoğraf seçimi iletişim algını doğrudan etkiler.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-yellow-500/10 to-purple-900/40 border border-yellow-500/20 rounded-2xl p-6 mb-8">
           <h2 className="text-2xl font-bold text-yellow-300 mb-4">
-            Premium Sonuç
+            📜 Premium Sonuç Özeti
           </h2>
 
-          <p className="text-gray-200 leading-relaxed">
-            VibeLens değerlendirmesine göre profilin, {report.profile_type}
-            kategorisinde güçlü bir sosyal izlenim taşıyor. Bu rapor, profilini
-            daha etkili sunmak ve ilk izlenim gücünü artırmak için bir başlangıç
-            noktasıdır. Gelecek analizlerde farklı fotoğraflarla sosyal algı
-            değişimini tekrar ölçebilirsin.
+          <p className="text-gray-200 leading-relaxed mb-4">
+            {report.summary}
+          </p>
+
+          <p className="text-gray-300 leading-relaxed">
+            VibeLens değerlendirmesine göre profilin,{" "}
+            <strong>{report.profile_type}</strong> kategorisinde güçlü bir sosyal izlenim
+            taşıyor. <strong>{report.vibelens_signature}</strong> imzası ve{" "}
+            <strong>{report.aura}</strong> aurası, profilinin yalnızca bir skor değil,
+            ayırt edici bir sosyal etki oluşturduğunu gösteriyor.
           </p>
         </div>
 
