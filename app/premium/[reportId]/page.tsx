@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
+import CheckPaymentButton from "../../components/CheckPaymentButton";
 
 function getBadges(report: any) {
   const badges = ["⭐ Premium Profil"];
@@ -94,6 +95,9 @@ export default async function ReportPage({
           >
             Premium Rapor Satın Al - 49 TL
           </Link>
+          <div className="mt-4">
+  <CheckPaymentButton reportId={reportId} />
+</div>
         </div>
       </main>
     );
